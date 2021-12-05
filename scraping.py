@@ -2,7 +2,8 @@
 
 This scraping script uses lyricsgenius, an open-source Python package that provides an interface for accessing song information using the Genius API.
 
-We handle two sets of songs: 1) past Billboard Hot 100 hits, and 2) songs that have not made the Billboard 100. For each dataset, we generate a csv containing the lyrics.
+We handle two sets of songs: 1) past Billboard Hot 100 hits, and 2) songs that have not made the Billboard 100. For each dataset, we generate a csv 
+containing the lyrics.
 
 """
 
