@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import requests
 from pandas.core.frame import DataFrame
 from api_key import client_access_token
+import re
 
 LyricsGenius = lyricsgenius.Genius(client_access_token)
 
@@ -33,7 +34,7 @@ for id in songlist['Unnamed: 0']:
     try:
         lyrics = scrapegenius(song, artist)
 
-        new_row = {'Name': song, 'Lyrics': lyrics}
+        new_row = {'Name': song, 'Lyrics': re.sub("([\[]).*?([\)\]])", "", lyrics)}
         data = data.append(new_row, ignore_index=True)
     except Exception as e:
         errors = errors.append({"song": song, "artist": artist}, ignore_index=True)
@@ -57,18 +58,16 @@ print(songlist.shape)
 data = pd.DataFrame(columns=['Name', 'Lyrics'])
 errors = pd.DataFrame(columns=['song', 'artist'])
 
-
-for id in songlist['Unnamed: 0']:
+for id in songlist['Unnamed: 0'][:10]:
     song = songlist['song'][id]
     artist = songlist['artist'][id]
+
     try:
         lyrics = scrapegenius(song, artist)
-
-        new_row = {'Name': song, 'Lyrics': lyrics}
+        new_row = {'Name': song, 'Lyrics': re.sub("([\[]).*?([\)\]])", "", lyrics)}
         data = data.append(new_row, ignore_index=True)
     except Exception as e:
         errors = errors.append({"song": song, "artist": artist}, ignore_index=True)
         print(e)
 
-data.to_csv("data/non-billboard-lyrics.csv", index=False)
-errors.to_csv("data/non-billboard-errors.csv", index=False)
+data.to_csv("data/lyrics.csv", index=False)
