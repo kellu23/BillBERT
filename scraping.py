@@ -34,7 +34,7 @@ for id in songlist['Unnamed: 0']:
     try:
         lyrics = scrapegenius(song, artist)
 
-        new_row = {'Name': song, 'Lyrics': re.sub("([\[]).*?([\)\]])", "", lyrics)}
+        new_row = {'Name': song, 'Lyrics': re.sub("([\[]).*?([\)\]])", "", lyrics).replace("\n", "").replace(",", "")}
         data = data.append(new_row, ignore_index=True)
     except Exception as e:
         errors = errors.append({"song": song, "artist": artist}, ignore_index=True)
@@ -64,7 +64,7 @@ for id in range(len(songlist)):
 
     try:
         lyrics = scrapegenius(song, artist)
-        new_row = {'Name': song, 'Lyrics': re.sub("([\[]).*?([\)\]])", "", lyrics)}
+        new_row = {'Name': song, 'Lyrics': re.sub("([\[]).*?([\)\]])", "", lyrics).replace("\n", "").replace(",", "")}
         data = data.append(new_row, ignore_index=True)
     except Exception as e:
         errors = errors.append({"song": song, "artist": artist}, ignore_index=True)
