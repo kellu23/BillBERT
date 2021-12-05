@@ -14,7 +14,7 @@ songlist.drop(songlist.columns.difference(
 
 
 def scrapegenius(song, artist):
-    songname = LyricsGenius.search_song(artist, song)
+    songname = LyricsGenius.search_song(song, artist)
     lyrics = songname.lyrics
     return lyrics
 
