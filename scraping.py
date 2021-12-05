@@ -1,10 +1,20 @@
+""" Genius Lyric Scraping Script
+
+This scraping script uses lyricsgenius, an open-source Python package that provides an interface for accessing song information using the Genius API.
+
+We handle two sets of songs: 1) past Billboard Hot 100 hits, and 2) songs that have not made the Billboard 100. For each dataset, we generate a csv containing the lyrics.
+
+"""
+
 import lyricsgenius
+from api_key import client_access_token
+
 import pandas as pd
 from bs4 import BeautifulSoup
 import requests
 from pandas.core.frame import DataFrame
-from api_key import client_access_token
 import re
+#to fix later--some of these imports might be redundant
 
 LyricsGenius = lyricsgenius.Genius(client_access_token)
 
